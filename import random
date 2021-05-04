@@ -1,0 +1,42 @@
+import random
+from selenium import webdriver
+import time
+from fake_useragent import UserAgent
+
+#url = "https://vk.com/"
+#url_2 = "https://translate.yandex.ru/"
+useragent = UserAgent()  # задаем опции юзерагента
+user_agents = [    #список из разных юзерагентов
+    "Chren",
+    "Mazila",
+    "YOUNDEX"
+]
+
+options = webdriver.ChromeOptions() #подключаем опции вебдрайвера
+options.add_argument("--proxy-server=91.217.42.3:8080") # прописываем новый прокси без авторизации
+#options.add_argument("user-agent={random.choice(user_agents)})}") # прописываем рандомный выбор юзерагента из списка
+driver = webdriver.Chrome(
+    executable_path=r"E:\selenium\chrome_driver\chromedriver.exe", # адрес расположения вебдрайвера
+    options=options) # указание опций драйвера которые мы присвоили переменной options
+
+#URL для открытия
+try:
+#    driver.get(url="https://www.whatsmybrowser.org/") #указание ссылки для перехода
+    driver.get(url="https://2ip.ru/")
+    time.sleep(10)    #пауза ожидания следующего действия в секундах
+    #driver.refresh() #обновление страницы
+    #driver.get_screenshot_as_file("scrin.png")   #сохранение скриншота
+   # driver.get(url=url_2)  #переход на другую ссылку
+  #  time.sleep(3)
+ #   driver.save_screenshot("scrin2.png")  # сохранение скрина
+#    driver.back()  #возвращение на предыдущую страницу
+
+
+#вывод ошибок если они есть
+except Exception as ex:
+    print(ex)
+
+#Завершение работы с браузером
+finally:
+    driver.close()
+    driver.quit()
